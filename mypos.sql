@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2020 at 05:25 PM
+-- Generation Time: May 11, 2020 at 09:02 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -25,6 +25,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id_cart` varchar(32) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `id_item` int(11) NOT NULL,
+  `qty_dibeli` int(11) NOT NULL,
+  `total_berat` int(40) NOT NULL,
+  `tgl_transaksi` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer`
 --
 
@@ -33,6 +48,8 @@ CREATE TABLE `customer` (
   `name` varchar(100) NOT NULL,
   `gender` enum('L','P') NOT NULL,
   `phone` varchar(20) NOT NULL,
+  `email_db` varchar(128) NOT NULL,
+  `password_db` varchar(128) NOT NULL,
   `address` text NOT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
   `updated` datetime DEFAULT NULL
@@ -42,8 +59,35 @@ CREATE TABLE `customer` (
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`customer_id`, `name`, `gender`, `phone`, `address`, `created`, `updated`) VALUES
-(1, 'wahyu s', 'L', '12121221', 'adwaijdad', '2020-03-22 16:43:16', NULL);
+INSERT INTO `customer` (`customer_id`, `name`, `gender`, `phone`, `email_db`, `password_db`, `address`, `created`, `updated`) VALUES
+(1, 'wahyu s', 'L', '12121221', 'b', '1', 'adwaijdad', '2020-03-22 16:43:16', NULL),
+(5, 'Ali', 'L', '082119999949', 'aa', '1', 'Jember', '2020-04-02 00:00:00', NULL),
+(6, 'Alex', 'L', '08213123', 'adwa@gmail.com', '12', 'Jember', '2020-04-22 00:00:00', NULL),
+(10, 'aaa', 'P', '23234', 'c@gmail.com', '11111', 'JL. Banyuwangi Garahan Pasar alas', '2020-05-03 22:46:16', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dtl_transaksi`
+--
+
+CREATE TABLE `dtl_transaksi` (
+  `id_transaksi` varchar(32) NOT NULL,
+  `item_id` varchar(32) NOT NULL,
+  `no` int(11) DEFAULT NULL,
+  `harga_satuan` int(20) NOT NULL,
+  `jml_dibeli_tmp` int(11) NOT NULL,
+  `jumlah_beli` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dtl_transaksi`
+--
+
+INSERT INTO `dtl_transaksi` (`id_transaksi`, `item_id`, `no`, `harga_satuan`, `jml_dibeli_tmp`, `jumlah_beli`) VALUES
+('IDC01105', '28', 1, 100000, 3, 0),
+('IDC01105', '26', 2, 1200000, 3, 0),
+('IDC11105', '28', 3, 100000, 4, 0);
 
 -- --------------------------------------------------------
 
@@ -80,6 +124,8 @@ CREATE TABLE `p_item` (
   `category_id` int(11) NOT NULL,
   `unit_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
+  `berat` int(129) NOT NULL,
+  `deskripsi` text DEFAULT NULL,
   `stock` int(10) NOT NULL DEFAULT 0,
   `image` varchar(100) DEFAULT NULL,
   `created` datetime NOT NULL DEFAULT current_timestamp(),
@@ -90,12 +136,14 @@ CREATE TABLE `p_item` (
 -- Dumping data for table `p_item`
 --
 
-INSERT INTO `p_item` (`item_id`, `barcode`, `name`, `category_id`, `unit_id`, `price`, `stock`, `image`, `created`, `updated`) VALUES
-(2, 'A0012', 'Kopi Stamina', 2, 2, 35000, 35, 'item-200326-8929eb5faa.jpeg', '2020-03-22 23:21:18', '2020-04-04 16:42:44'),
-(13, 'A0120', 'formula', 2, 2, 11111, 0, 'item-200326-9eb7435a70.jpeg', '2020-03-25 02:39:06', '2020-03-26 18:43:35'),
-(14, 'A0123', 'qwdw', 2, 2, 121213, 18, 'item-200325-2f72f96e0c.png', '2020-03-26 03:27:43', '2020-03-25 22:34:38'),
-(21, 'kkkk', 'pqkeq', 3, 4, 90000, 20, 'item-200329-8263df9d35.png', '2020-03-29 16:23:06', NULL),
-(23, 'facebook.com', 'awo[ka', 2, 2, 1938190, 0, 'item-200405-5010912212.jpg', '2020-04-05 20:55:21', '2020-04-08 16:46:40');
+INSERT INTO `p_item` (`item_id`, `barcode`, `name`, `category_id`, `unit_id`, `price`, `berat`, `deskripsi`, `stock`, `image`, `created`, `updated`) VALUES
+(2, 'A0012', 'Kopi Stamina', 2, 2, 12, 900, '', 28, 'item-200326-8929eb5faa.jpeg', '2020-03-22 23:21:18', '2020-05-08 17:24:05'),
+(14, 'A0123', 'qwdw', 2, 2, 121213, 100, '', 16, 'item-200504-fae40e9fc6.jpg', '2020-03-26 03:27:43', '2020-05-11 19:28:59'),
+(21, 'kkkk', 'pqkeq', 3, 4, 90000, 250, 'adadwadwad\r\n\r\nadwad\r\n\r\nadawd', 18, 'item-200504-95a3a5c8cf.jpeg', '2020-03-29 16:23:06', '2020-05-11 19:29:09'),
+(23, 'facebook.com', 'awo[ka', 2, 2, 1938190, 250, '', 0, 'item-200504-676f542087.jpeg', '2020-04-05 20:55:21', '2020-05-11 19:29:16'),
+(26, 'aawad', 'Kopi rempahawd', 3, 2, 1200000, 1000, 'adadaawd', 10, 'item-200508-21feeb17c1.png', '2020-05-08 22:24:45', NULL),
+(27, 'pp', 'ppppp', 2, 4, 1000000, 8000, 'awda', 0, 'item-200510-5a1af13947.jpg', '2020-05-10 23:26:45', NULL),
+(28, 'A01233', 'adlll', 4, 4, 100000, 754, '\'oko', 0, 'item-200511-66ff800752.png', '2020-05-11 06:43:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -115,7 +163,7 @@ CREATE TABLE `p_unit` (
 --
 
 INSERT INTO `p_unit` (`unit_id`, `name`, `created`, `updated`) VALUES
-(2, 'Perkotak', '2020-03-22 17:27:55', '2020-03-22 14:28:26'),
+(2, 'Perkotak', '2020-03-22 17:27:55', '2020-05-09 23:53:51'),
 (4, 'Selusin', '2020-03-22 20:28:47', NULL),
 (5, 'Perkilo', '2020-04-01 11:20:50', NULL);
 
@@ -141,6 +189,34 @@ CREATE TABLE `supplier` (
 
 INSERT INTO `supplier` (`supplier_id`, `name`, `phone`, `address`, `description`, `created`, `updated`) VALUES
 (3, 'lkanwdoin', 'owdnoin', 'wudhnowuod', 'uowidoiwi', '2020-03-17 13:54:37', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi`
+--
+
+CREATE TABLE `transaksi` (
+  `id_transaksi` varchar(20) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `customer_id` int(11) NOT NULL,
+  `alamat_kirim` text NOT NULL,
+  `tgl_kirim` int(32) DEFAULT NULL,
+  `total_harga` int(20) NOT NULL,
+  `total_final` int(20) NOT NULL,
+  `status_bayar` int(11) DEFAULT NULL,
+  `status_kirim` int(11) DEFAULT NULL,
+  `tgl_transaksi` varchar(32) DEFAULT NULL,
+  `bukti_transfer` varchar(123) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `transaksi`
+--
+
+INSERT INTO `transaksi` (`id_transaksi`, `user_id`, `customer_id`, `alamat_kirim`, `tgl_kirim`, `total_harga`, `total_final`, `status_bayar`, `status_kirim`, `tgl_transaksi`, `bukti_transfer`) VALUES
+('IDC01105', 0, 5, 'JL. Banyuwangi Garahan Pasar alasa', NULL, 3900000, 4150000, NULL, NULL, '2020-05-11 19:20:41', NULL),
+('IDC11105', 0, 5, 'AA', NULL, 400000, 544000, NULL, NULL, '2020-05-11 19:24:19', NULL);
 
 -- --------------------------------------------------------
 
@@ -184,8 +260,7 @@ CREATE TABLE `t_sale` (
 --
 
 INSERT INTO `t_sale` (`sale_id`, `invoice`, `customer_id`, `total_price`, `discount`, `final_price`, `cash`, `remaining`, `note`, `date`, `user_id`, `created`) VALUES
-(45, 'MP2004050001', NULL, 347426, 5000, 342426, 342426, 0, 'LUNAS', '2020-04-05', 1, '2020-04-05 23:41:41'),
-(46, 'MP2004050001', NULL, 69800, 500, 69300, 70000, 700, 'Lunas', '2020-04-05', 1, '2020-04-06 02:31:51');
+(53, 'PC2005090001', NULL, 90012, 0, 90012, 900122, 810110, 'aa', '2020-05-09', 1, '2020-05-10 03:44:43');
 
 -- --------------------------------------------------------
 
@@ -208,9 +283,8 @@ CREATE TABLE `t_sale_detail` (
 --
 
 INSERT INTO `t_sale_detail` (`detail_id`, `sale_id`, `item_id`, `price`, `qty`, `discount_item`, `total`) VALUES
-(49, 45, 2, 35000, 3, 0, 105000),
-(50, 45, 14, 121213, 2, 0, 242426),
-(51, 46, 2, 35000, 2, 100, 69800);
+(60, 53, 21, 90000, 1, 0, 90000),
+(61, 53, 2, 12, 1, 0, 12);
 
 --
 -- Triggers `t_sale_detail`
@@ -249,7 +323,9 @@ INSERT INTO `t_stock` (`stock_id`, `item_id`, `type`, `detail`, `supplier_id`, `
 (1, 14, 'in', 'kulakan', 3, 20, '2020-03-31', '2020-03-31 19:36:36', 1),
 (3, 21, 'in', 'Kulakan', 3, 20, '2020-03-31', '2020-03-31 19:38:37', 1),
 (9, 2, 'in', 'Kulakan', 3, 10, '2020-04-03', '2020-04-04 01:26:34', 1),
-(10, 2, 'in', 'kulakan', NULL, 30, '2020-04-04', '2020-04-04 12:09:14', 1);
+(10, 2, 'in', 'kulakan', NULL, 30, '2020-04-04', '2020-04-04 12:09:14', 1),
+(11, 2, 'in', 'Kulakan', NULL, 10, '2020-05-05', '2020-05-06 04:38:29', 1),
+(13, 26, 'in', 'Kulakan', 3, 10, '2020-05-09', '2020-05-10 04:56:31', 1);
 
 -- --------------------------------------------------------
 
@@ -314,6 +390,12 @@ ALTER TABLE `supplier`
   ADD PRIMARY KEY (`supplier_id`);
 
 --
+-- Indexes for table `transaksi`
+--
+ALTER TABLE `transaksi`
+  ADD PRIMARY KEY (`id_transaksi`);
+
+--
 -- Indexes for table `t_cart`
 --
 ALTER TABLE `t_cart`
@@ -357,7 +439,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `p_category`
@@ -369,7 +451,7 @@ ALTER TABLE `p_category`
 -- AUTO_INCREMENT for table `p_item`
 --
 ALTER TABLE `p_item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `p_unit`
@@ -387,19 +469,19 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `t_sale`
 --
 ALTER TABLE `t_sale`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `t_sale_detail`
 --
 ALTER TABLE `t_sale_detail`
-  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `t_stock`
 --
 ALTER TABLE `t_stock`
-  MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`
