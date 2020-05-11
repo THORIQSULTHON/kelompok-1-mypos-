@@ -29,7 +29,7 @@ class Home extends CI_Controller {
 		$data['row'] = $this->Transaksi_m->get_transaksi();
 		$this->load->view('home/elemen/header');
 		$this->load->view('home/histori_transaksi', $data);
-		$this->load->view('home//elemen/footer');
+		$this->load->view('home/elemen/footer');
 	}
 	
 	public function detail($id)

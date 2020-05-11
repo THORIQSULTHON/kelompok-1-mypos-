@@ -46,7 +46,7 @@ class Transaksi_m extends CI_Model
         {
             $this->db->where('customer_id', $users_params);
         }
-        $querys = $this->db->query($qry)->result_array;
+        $querys = $this->db->query($qry);
         return $querys;
     }
 }
