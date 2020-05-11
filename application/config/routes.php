@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 // BACA KOMEN LUNG
-$route['default_controller'] = 'dashboard';
+$route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 // Routing Tampilan Link untuk pelanggan/(segment_seterusnya), menjadi costumer/(segmentlainnya) "ingat setelah tanda sama_dengan "Pelanggan/" adalah file controller di dalam folder controller, dan segment seterusnya adalah nama function yang ada di dalam file tersebut "pelanggan/add" = "File_controller_pelanggan.php/namafunction_didalam_file_controller.php" contoh langsungnya "pelanggan/add"

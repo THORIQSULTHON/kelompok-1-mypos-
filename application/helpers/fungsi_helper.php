@@ -9,6 +9,30 @@ function check_already_login()
         redirect('dashboard');
     }
 }
+function check_already_login_user()
+{
+    $ci =& get_instance();
+    $user_session   =   $ci->session->userdata('customerid');
+    if($user_session)
+    {
+        redirect('Home');
+    }
+}
+
+function cek_login_cart()
+{
+    $ci =& get_instance();
+    $sesio = $ci->session->userdata('customerid');
+    if(!$sesio)
+    {
+      
+            echo "<script>
+                        alert('Anda harus login dulu');
+                        window.location='".site_url('Home')."';
+                    </script>";
+        
+    }
+}
 
 function check_not_login()
 {

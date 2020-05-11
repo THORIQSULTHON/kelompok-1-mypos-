@@ -39,9 +39,12 @@ class User extends CI_Controller
         // ini untuk membuat tulisan setiap error menjadi merahdengan menambah kan span
         $this->form_validation->set_error_delimiters('<span class="help-block">', '</span>');
 
-        if ($this->form_validation->run() == FALSE){
+        if ($this->form_validation->run() == FALSE)
+        {
             $this->template->load('template','user/user_form_add');
-        } else{
+        } 
+        else
+        {
            $post = $this->input->post(null, TRUE);
            $this->user_m->add($post);
            if($this->db->affected_rows() > 0)

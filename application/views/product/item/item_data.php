@@ -32,6 +32,7 @@
                                 <th>Kategori Barang</th>
                                 <th>Unit</th>
                                 <th>Harga Barang</th>
+                                <th>Berat</th>
                                 <th>Stock</th>
                                 <td><b>Gambar Barang</b></td>
                                 <th>Actions</th>
@@ -52,6 +53,7 @@
                                 <td><?= $data->category_name?></td>
                                 <td><?= $data->unit_name?></td>
                                 <td><?= $data->price?></td>
+                                <td><?= $data->berat?></td>
                                 <td><?= $data->stock?></td>
                                 <td>
                                 <?php if($data->image != null) { ?>

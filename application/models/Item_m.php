@@ -81,6 +81,8 @@ class item_m extends CI_Model {
             'category_id'           =>   $post['category'],
             'unit_id'               =>   $post['unit'],
             'price'                 =>   $post['price'],
+            'berat'                 =>   $post['berat'],
+            'deskripsi'             =>   $post['deskripsi'],
             'image'                 =>   $post['image'],
         ];
         $this->db->insert('p_item', $params);
@@ -96,6 +98,8 @@ class item_m extends CI_Model {
         'category_id'           =>   $post['category'],
         'unit_id'               =>   $post['unit'],
         'price'                 =>   $post['price'],
+        'berat'                 =>   $post['berat'],
+        'deskripsi'             =>   $post['deskripsi'],
             'updated'       =>   date('Y-m-d H:i:s')
         ];
         // ini membuat validasi atau logika jika foto memang tidak kosong alias ada isinya maka di update fotonya dengan yang baru, tidak usah pakai else, jadi kalau kita gak mengganti fotonya maka update di fotonya tetap menggunakan foto yang lama

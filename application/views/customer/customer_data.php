@@ -29,6 +29,7 @@
                                 <th>Nama customer</th>
                                 <th>Jenis Kelamin</th>
                                 <th>NoHP</th>
+                                <th>Email</th>
                                 <th>Alamat</th>
                                 <th>Actions</th>
                             </tr>    
@@ -41,6 +42,7 @@
                                 <td><?= $data->name?></td>
                                 <td><?= $data->gender?></td>
                                 <td><?= $data->phone?></td>
+                                <td><?= $data->email_db?></td>
                                 <td><?= $data->address?></td>
                                 <td class="text-center" width="160px">
 

@@ -25,12 +25,12 @@
                     <table class="table table-bordered table-striped" id="table1">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Level</th>
-                                <th>Actions</th>
+                                <th scope="col">No</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Level</th>
+                                <th scope="col">Actions</th>
                             </tr>    
                         </thead>
                         <tbody>

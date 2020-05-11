@@ -19,7 +19,7 @@ class Sale_m extends CI_Model
         } else {
             $no = "0001";
         }
-        $invoice = "MP".date('ymd').$no;
+        $invoice = "PC".date('ymd').$no;
         return $invoice;
     }
 
@@ -148,5 +148,7 @@ class Sale_m extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+
 
 }

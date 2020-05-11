@@ -45,6 +45,14 @@
                                         <input type="number" name="phone" value="<?=$row->phone?>" class="form-control" required>
                                     </div>
                                     <div class="form-group">
+                                        <label for="">Email *</label>
+                                        <input type="text" name="email" value="<?=$row->email_db?>" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="">Password *</label>
+                                        <input type="password" name="pass" value="<?=$row->password_db?>" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="">Alamat customer *</label>
                                         <textarea name="addr" value="" class="form-control" required><?=$row->address?></textarea>
                                     </div>

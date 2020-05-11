@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class category extends CI_Controller {
+class Category extends CI_Controller {
 
 	function __construct()
     {
@@ -64,7 +64,7 @@ class category extends CI_Controller {
 
 	public function edit($id)
 	{
-		$query	=		$this->category_m->get($id);
+		$query	=		$this->Category_m->get($id);
 		if($query->num_rows() > 0)
 		{
 			$category	=	$query->row();

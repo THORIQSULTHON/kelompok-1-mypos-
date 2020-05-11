@@ -363,7 +363,7 @@ $(document).on('click', '#add_cart', function(){
     var item_id = $('#item_id').val()
     var price   = $('#price').val() // jika add_cart di klik maka setiap variabel akan di isi dari input inputan hiden ini
     var stock   = $('#stock').val()
-    var qty     = $('#qty').val()
+    var qty     = parseInt($('#qty').val())
     // ini validasi nya
     if(item_id == ''){
         alert('Barang Belum Dipilih')
@@ -373,8 +373,8 @@ $(document).on('click', '#add_cart', function(){
         $('#item_id').val('')
         $('#barcode').val('')
         $('#barcode').focus()
-        }else if(stock < qty){
-        alert('Stock Barang Tidak Cukup')
+        }else if(qty > stock){
+        alert('Inputan anda melebihi stok yang tersedia')
         $('#item_id').val('')
         $('#barcode').val('')
         $('#barcode').focus()

@@ -46,7 +46,7 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="price1">Unit barang *</label>
+                                        <label for="unit">Unit barang *</label>
                                         <?php echo form_dropdown('unit', $unit, $selectedunit, 
                                         ['class' => 'form-control', 'required' => 'required']) ?>
                                     </div>
@@ -55,7 +55,16 @@
                                         <input type="number" name="price" id="price1" value="<?= $row->price?>" class="form-control" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="price1">Gambar/Foto Barang</label>
+                                        <label for="berat1">Berat *</label>
+                                        <input type="number" name="berat" id="berat1" value="<?= $row->berat?>" class="form-control" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="deskripsi1">Deskripsi Barang </label>
+                                        <textarea  name="deskripsi" id="deskripsi1"  class="form-control" cols="30" rows="10"><?= $row->deskripsi?></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="image">Gambar/Foto Barang</label>
                                             <?php if($page == 'edit'){
                                                     if($row->image != null) {?>
                                                             <div style="margin-bottom:5px">
@@ -63,7 +72,7 @@
                                                             </div>
                                                    <?php }
                                                 }?>
-                                        <input type="file" name="image" id="price1" class="form-control" >
+                                        <input type="file" name="image" id="image" class="form-control" >
                                         <small>(Biarkan Kosong jika tidak ingin <?= $page == 'edit' ? 'Mengganti gambarnya' : 'Menambahkan gambarnya'?>)</small>
                                     </div>
                                     <div class="form-group">

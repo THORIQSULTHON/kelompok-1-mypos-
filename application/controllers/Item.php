@@ -21,11 +21,12 @@ class Item extends CI_Controller {
             $no++;
             $row = array();
             $row[] = $no.".";
-            $row[] = $item->barcode.'<br><a href="'.site_url('item/barcode_qrcode/'.$item->item_id).'" class="btn btn-default btn-xs">Generate <i class="fa fa-barcode"></i></a>';
+            $row[] = $item->barcode.'<br><a href="'.site_url('item/barcode_qrcode/'.$item->item_id).'" class="btn btn-default btn-xs">Cetak <i class="fa fa-barcode"></i></a>';
             $row[] = $item->name;
             $row[] = $item->category_name;
             $row[] = $item->unit_name;
             $row[] = indo_currency($item->price);
+            $row[] = $item->berat;
             $row[] = $item->stock;
             $row[] = $item->image != null ? '<img src="'.base_url('uploads/product/'.$item->image).'" class="img" style="width:100px">' : null;
             // add html for action
@@ -56,6 +57,8 @@ class Item extends CI_Controller {
 		$item->barcode		=	null;
 		$item->name 		=	null;
 		$item->price		=	null;
+		$item->berat		=	null;
+		$item->deskripsi	=	null;
 		$item->category_id 	= 	null;
 
 
@@ -88,7 +91,8 @@ class Item extends CI_Controller {
 					// ini untuk menseting nama file yang akan di simpan , ketika di simpan maka yang akan terjadi nama fileyang di upload akan di ubah menjadi "item-(tanggal upload)-(dan kode yang di enkripsi menggunakan md5)"
 					$config['file_name']		=	'item-'.date('ymd').'-'.substr(md5(rand()),0,10);
 					$this->load->library('upload', $config);
-		$post		=	$this->input->post(null, TRUE);
+
+					$post		=	$this->input->post(null, TRUE);
 
 		if(isset($_POST['add']))
 		{

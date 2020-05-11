@@ -20,7 +20,7 @@ class Pelanggan extends CI_Controller {
 		$customer = new stdClass();
 		$customer->customer_id		=	null;
         $customer->name 			=	null;
-		$customer->gender 		=	null;
+		$customer->gender 			=	null;
 		$customer->phone 			=	null;
 		$customer->address 			=	null;
 		$data = array(
@@ -64,7 +64,7 @@ class Pelanggan extends CI_Controller {
 		}
 		echo "<script>window.location='".site_url('customer')."';</script>";
 	}
-
+					// $id adalah para meter dari link di dalam tombol edit yang berisikan (costumer_id)
 	public function edit($id)
 	{
 		$query	=		$this->customer_m->get($id);
