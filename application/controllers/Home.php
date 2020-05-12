@@ -100,15 +100,69 @@ class Home extends CI_Controller {
 	}
 	public function prosesct()
 	{
+		$post = $this->input->post(null, TRUE);
+
 		if(isset($_POST['edit_tombol']))
 		{
-			$post = $this->input->post(null, TRUE);
+			
 			$this->Cart_m->edit($post);
 			if($this->db->affected_rows() > 0)
 			{
 				echo "<script>alert('Sukses');</script>";
 			}
 			echo "<script>window.location='".site_url('Home/cart')."';</script>";
+		}
+
+		else if(isset($_POST['Upload_tombol']))
+		{
+			$config['upload_path']  	= './uploads/bukti/';
+			$config['allowed_types'] 	= 'jpg|png|jpeg';
+			$config['max_size']			= 2048;
+			$config['file_name']  		= 'bukti-'.date('ymd').'-'.substr(md5(rand()),0,10);
+			
+			$this->load->library('upload', $config);
+
+			if(@$_FILES['upload_foto']['name'] != null)
+			{
+				if($this->upload->do_upload('upload_foto'))
+				{
+					$item = $this->Transaksi_m->get($post['id_trans'])->row();
+					if($item->bukti_transfer != null)
+					{
+						$target_file = './uploads/bukti/'.$item->bukti_transfer;
+						unlink($target_file);
+					}
+
+					$post['upload_foto'] = $this->upload->data('file_name');
+					$this->Transaksi_m->edit_bukti($post);
+
+					if($this->db->affected_rows() > 0)
+					{
+						echo "<script>alert('bukti berhasil di upload, silahkan Tunggu konfirmasi dari Penjual');</script>";
+					}
+					echo "<script>window.location='".site_url('Home/histori_transaksi')."';</script>";
+				}
+				else
+				{
+					echo "<script>alert('Tolong upload inputan gambarnya');</script>";
+				}
+				if($this->db->affected_rows() > 0)
+				{
+					echo "<script>alert('data bukti telah di edit');</script>";
+				}
+				echo "<script>window.location='".site_url('Home/histori_transaksi')."';</script>";
+			}
+			else
+			{
+				$post['upload_foto'] = null;
+				$this->Transaksi_m->edit_bukti($post);
+
+				if($this->db->affected_rows() > 0)
+				{
+					echo "<script>alert('data tanpa foto bukti telah di update');</script>";
+				}
+				echo "<script>window.location='".site_url('Home/histori_transaksi')."';</script>";
+			}
 		}
 	}
 

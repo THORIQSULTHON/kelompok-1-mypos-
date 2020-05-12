@@ -49,4 +49,32 @@ class Transaksi_m extends CI_Model
         $querys = $this->db->query($qry);
         return $querys;
     }
+
+    public function get($id = null)
+    {
+        $this->db->from('transaksi');
+        if($id !=  null)
+        {
+            $this->db->where('id_transaksi', $id);
+        }
+        $query = $this->db->get();
+        return $query;
+
+    }
+
+    public function edit_bukti($post)
+    {
+        $params = 
+        [
+            'no_rek'  => $post['norek']
+        ];
+
+        if($post['upload_foto'] != null)
+        {
+            $params['bukti_transfer'] = $post['upload_foto'];
+        }
+
+        $this->db->where('id_transaksi', $post['id_trans']);
+        $this->db->update('transaksi', $params);
+    }
 }
