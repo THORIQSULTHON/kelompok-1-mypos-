@@ -77,4 +77,20 @@ class Transaksi_m extends CI_Model
         $this->db->where('id_transaksi', $post['id_trans']);
         $this->db->update('transaksi', $params);
     }
+
+    public function edit_buktinya($post)
+    {
+        $params = 
+        [
+            'no_rek'  => $post['norek']
+        ];
+
+        if($post['batal_foto'] != null)
+        {
+            $params['bukti_transfer'] = $post['batal_foto'];
+        }
+
+        $this->db->where('id_transaksi', $post['id_trans']);
+        $this->db->update('transaksi', $params);
+    }
 }

@@ -39,16 +39,17 @@
                         <td><?=$data['tgl_transaksi'];?></td>
                         <td>
                             <?php if($data['status_bayar'] != null) :?>
-                                <a class="badge badge-success">Sudah Terkomfirmasi</a>
+                                <a class="badge badge-success" style="color: white;">Sudah Terkomfirmasi</a>
+                                <a class="badge badge-light">Barang Akan di kirim</a>
                             <?php elseif ($data['bukti_transfer'] != null) :?>
-                                <a class="badge badge-primary">Tunggu konfirmasi Penjual</a>
+                                <a class="badge badge-primary" style="color: white;">Tunggu konfirmasi Penjual</a>
                             <?php else :?>
-                                <a class="badge badge-warning">Belum Terkomfirmasi</a>
+                                <a class="badge badge-warning" >Belum Terkomfirmasi</a>
                             <?php endif;?>
                         </td>
-                        <td>
+                        <td >
                             <?php if($data['bukti_transfer'] != null) :?>
-                                <img src="<?=base_url('uploads/bukti/'. $data['bukti_transfer']);?>">
+                                <img style="width:100px; height: 100px;" src="<?=base_url('uploads/bukti/'. $data['bukti_transfer']);?>">
                             <?php else :  ?>
                                 belum mengirim bukti transfer 
                             <?php endif; ?>
@@ -77,7 +78,7 @@
                             <?php if($data['status_bayar'] != null) : ?>
                                 <button data-target="#modalBatal<?=$id?>" data-toggle="modal" class="btn btn-success btn-sm mt-3 mb-2" disabled><i class="fa fa-check"> Selesai</i></button>
                             <?php elseif($data['bukti_transfer'] != null) :?>
-                                <button data-target="#modalBatal<?=$id?>" data-toggle="modal" class="btn btn-danger btn-sm mt-3 mb-2" ><i class="fa fa-times-circle"> Ganti foto</i></button>
+                                <button data-target="#modalBayar<?=$id?>" data-toggle="modal" class="btn btn-danger btn-sm mt-3 mb-2" ><i class="fa fa-times-circle"> Ganti foto</i></button>
                             <?php else :?>
                                 <button data-target="#modalBayar<?=$id?>" data-toggle="modal" class="btn btn-primary btn-sm mt-3 mb-2" >Upload Bukti</button>
                             <?php endif;?>
@@ -111,9 +112,18 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="norek"></label>
-                                <input type="number" class="form-control" value="" id="norek" name="norek" placeholder="Masukan no rek">
+                            <?php if($data['no_rek'] != null) :?>
+                                <input type="number" class="form-control" value="<?=$data['no_rek'];?>" id="norek" name="norek" placeholder="Masukan no rek">
+                            <?php else : ?>
+                                <input type="number" class="form-control" value="<?=$data['no_rek'];?>" id="norek" name="norek" placeholder="Masukan no rek">
+                            <?php endif;?>
                                 <input type="hidden" class="form-control" value="<?=$id;?>" id="id_trans" name="id_trans" placeholder="Masukan no rek">
                         </div>
+                        <?php if($data['bukti_transfer'] != null) : ?>
+                            <center>
+                                <img src="<?=base_url('uploads/bukti/'. $data['bukti_transfer']);?>" alt="">
+                            </center>
+                        <?php endif;?>
                         <div class="form-group">
                             <label for="upload_foto">Pilih Foto bukti transaksi</label>
                             <input type="file" class="form-control" id="upload_foto" name="upload_foto">
@@ -131,46 +141,3 @@
     endforeach;
 ?>
 <!-- modal batal untuk gambar -->
-<?php 
-
-    $usres = $this->session->userdata('customerid');
-    $qt    = $this->db->query("SELECT * FROM transaksi WHERE customer_id = '$usres'")->result_array();
-    foreach($qt as $data) :
-    $id = $data['id_transaksi'];
-?>
-    <!-- Modal upload sekaligus input no rek -->
-    <div class="modal fade" id="modalBatal<?=$id?>">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                            <h4 class="modal-tittle">Silahkan Upload kembali untuk mengubah bukti transaksi anda</h4>
-                    </div>
-                <form action="<?=base_url('Home/prosesct');?>" enctype="multipart/form-data" method="post">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="norek"></label>
-                                <input type="number" class="form-control" value="" id="norek" name="norek" placeholder="Masukan no rek">
-                                <input type="hidden" class="form-control" value="<?=$id;?>" id="id_trans" name="id_trans" placeholder="Masukan no rek">
-                        </div>
-                        <center>
-                        <img src="<?=base_url('uploads/bukti/'. $data['bukti_transfer']);?>" alt="">
-                        </center>
-                        <div class="form-group">
-                            <label for="batal_foto">Pilih Foto bukti transaksi</label>
-                            <input type="file" class="form-control" id="batal_foto" name="batal_foto">
-                        </div>
-                    </div>
-                <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal">Tidak</button>
-                        <button class="btn btn-success" name="Upload_tombol" type="submit">Simpan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-<?php
-    endforeach;
-?>
