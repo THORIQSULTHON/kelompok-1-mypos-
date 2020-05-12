@@ -43,8 +43,8 @@
 				<div class="row">
 					<div class="col-lg-2 text-center text-lg-left">
 						<!-- logo -->
-						<a href="./index.html" class="site-logo">
-							<img src="<?= base_url(); ?>assets/assets_landingpage/img/logo.png" alt="">
+						<a href="" class="site-logo">
+							<!-- <img src="" alt=""> -->
 						</a>
 					</div>
 					<div class="col-xl-4 col-lg-5 ml-5">
@@ -61,8 +61,6 @@
 									<li><a href="#">Ganti Password</a></li>
 									<li><a data-target="#modalUpload" data-toggle="modal" class="btn">Upload bukti Pembayaran</a></li>
 									</ul>
-								</li>
-								
 								<?php else :?>
 								<!-- kondisi gagal -->
 								<a href="<?= base_url('Auth_user');?>" class="ml-7">Sign</a> In or <a href="<?= base_url('Auth_user/registrasi');?>">Create Account</a>

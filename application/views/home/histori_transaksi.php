@@ -16,6 +16,7 @@
                       <th scope="col">Foto Bukti Transfer</th>
                       <!-- <th scope="col">Aksi</th> -->
                       <th scope="col">Untuk kode </th>
+                      <th scope="col">Untuk kode </th>
                       </tr>
                   </thead>
                     <tbody>
@@ -39,6 +40,8 @@
                         <td>
                             <?php if($data['status_bayar'] != null) :?>
                                 <a class="badge badge-success">Sudah Terkomfirmasi</a>
+                            <?php elseif ($data['bukti_transfer'] != null) :?>
+                                <a class="badge badge-primary">Tunggu konfirmasi Penjual</a>
                             <?php else :?>
                                 <a class="badge badge-warning">Belum Terkomfirmasi</a>
                             <?php endif;?>
@@ -59,11 +62,25 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $data['id_transaksi']; ?></h5>
-                                        <p class="card-text">Silahkan Membaya ke rekening di bawah ini</p>
-                                        <button data-target="#modalBayar<?=$id?>" data-toggle="modal" class="btn btn-primary btn-xs mt-3 mb-2">Lihat Rekening</button>
+                                        <?php if($data['bukti_transfer'] != null) :?>
+                                               <p class="badge badge-light">Bukti Transfer Telah di upload, Klik tombol "Ganti foto" ganti Bukti</p>
+                                        <?php else : ?>
+                                                <p class="card-text">Silahkan Membayar ke rekening di atas, dan mengirim foto dengan menekan tombol "<b>Upload Bukti</b>"</p>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
+                        </td>
+                        
+                        <td>
+                            <!-- tombol batal untuk membatalkan gambar transaksinya -->
+                            <?php if($data['status_bayar'] != null) : ?>
+                                <button data-target="#modalBatal<?=$id?>" data-toggle="modal" class="btn btn-success btn-sm mt-3 mb-2" disabled><i class="fa fa-check"> Selesai</i></button>
+                            <?php elseif($data['bukti_transfer'] != null) :?>
+                                <button data-target="#modalBatal<?=$id?>" data-toggle="modal" class="btn btn-danger btn-sm mt-3 mb-2" ><i class="fa fa-times-circle"> Ganti foto</i></button>
+                            <?php else :?>
+                                <button data-target="#modalBayar<?=$id?>" data-toggle="modal" class="btn btn-primary btn-sm mt-3 mb-2" >Upload Bukti</button>
+                            <?php endif;?>
                         </td>
                     </tr>
                         
@@ -95,11 +112,55 @@
                         <div class="form-group">
                             <label for="norek"></label>
                                 <input type="number" class="form-control" value="" id="norek" name="norek" placeholder="Masukan no rek">
-                                <input type="text" class="form-control" value="<?=$id;?>" id="id_trans" name="id_trans" placeholder="Masukan no rek">
+                                <input type="hidden" class="form-control" value="<?=$id;?>" id="id_trans" name="id_trans" placeholder="Masukan no rek">
                         </div>
                         <div class="form-group">
                             <label for="upload_foto">Pilih Foto bukti transaksi</label>
                             <input type="file" class="form-control" id="upload_foto" name="upload_foto">
+                        </div>
+                    </div>
+                <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">Tidak</button>
+                        <button class="btn btn-success" name="Upload_tombol" type="submit">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php
+    endforeach;
+?>
+<!-- modal batal untuk gambar -->
+<?php 
+
+    $usres = $this->session->userdata('customerid');
+    $qt    = $this->db->query("SELECT * FROM transaksi WHERE customer_id = '$usres'")->result_array();
+    foreach($qt as $data) :
+    $id = $data['id_transaksi'];
+?>
+    <!-- Modal upload sekaligus input no rek -->
+    <div class="modal fade" id="modalBatal<?=$id?>">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                            <h4 class="modal-tittle">Silahkan Upload kembali untuk mengubah bukti transaksi anda</h4>
+                    </div>
+                <form action="<?=base_url('Home/prosesct');?>" enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="norek"></label>
+                                <input type="number" class="form-control" value="" id="norek" name="norek" placeholder="Masukan no rek">
+                                <input type="hidden" class="form-control" value="<?=$id;?>" id="id_trans" name="id_trans" placeholder="Masukan no rek">
+                        </div>
+                        <center>
+                        <img src="<?=base_url('uploads/bukti/'. $data['bukti_transfer']);?>" alt="">
+                        </center>
+                        <div class="form-group">
+                            <label for="batal_foto">Pilih Foto bukti transaksi</label>
+                            <input type="file" class="form-control" id="batal_foto" name="batal_foto">
                         </div>
                     </div>
                 <div class="modal-footer">
