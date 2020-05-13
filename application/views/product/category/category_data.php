@@ -16,7 +16,7 @@
             <div class="box-header">
                 <h3 class="box-title">Daftar Kategori</h3>
                 <div class="pull-right">
-                        <a href="<?=site_url('category/add')?>" class="btn btn-primary btn-flat">
+                        <a href="<?=site_url('Category/add')?>" class="btn btn-primary btn-flat">
                                 <i class="fa fa-plus"></i> Buat
                         </a>
                 </div>
@@ -39,10 +39,10 @@
                                 <td><?= $data->name?></td>
                                 <td class="text-center" width="160px">
 
-                                <a href="<?=site_url('category/edit/'. $data->category_id)?>" class="btn btn-warning btn-xs">
+                                <a href="<?=site_url('Category/edit/'. $data->category_id)?>" class="btn btn-warning btn-xs">
                                             <i class="fa fa-pencil"></i> Edit
                                        </a>
-                                       <a href="<?=site_url('category/del/'. $data->category_id)?>" onclick="return confirm('apakah Anda Yakin Menghapus Data?')" class="btn btn-danger btn-xs">
+                                       <a href="<?=site_url('Category/del/'. $data->category_id)?>" onclick="return confirm('apakah Anda Yakin Menghapus Data?')" class="btn btn-danger btn-xs">
                                             <i class="fa fa-trash"></i> Hapus
                                        </a>
                                 </td>

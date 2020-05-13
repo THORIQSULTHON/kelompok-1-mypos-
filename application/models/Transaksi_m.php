@@ -38,16 +38,15 @@ class Transaksi_m extends CI_Model
         $this->db->delete('cart');
     }
 
-    public function get_transaksi($users_params = null)
+    public function get_transaksi($id = null)
     {
-        $users = $this->session->userdata('customerid');
-        $qry  = "SELECT * FROM `transaksi` WHERE customer_id = '$users";
-        if ($users_params != null)
+        $this->db->from('transaksi');
+        if ($id != null)
         {
-            $this->db->where('customer_id', $users_params);
+            $this->db->where('customer_id', $id);
         }
-        $querys = $this->db->query($qry);
-        return $querys;
+        $querys = $this->db->get();
+        return $querys->result_array();
     }
 
     public function get($id = null)

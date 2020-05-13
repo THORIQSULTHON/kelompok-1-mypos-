@@ -186,7 +186,7 @@
         <div class="col-lg-3">
             <div class="box box-widget">
                 <div class="box-body">
-                    <table style="100%">
+                    <table style="width:100%;">
                         <tr>
                             <td style="vertical-align:top; width:30%">
                                 <label for="cash">Cash</label>
@@ -215,7 +215,7 @@
         <div class="col-lg-3">
             <div class="box box-widget">
                 <div class="box-body">
-                    <table style="100%">
+                    <table style="width:100%;">
                         <tr>
                             <td style="vertical-align:top">
                                 <label for="note">Catatan</label>
@@ -381,7 +381,7 @@ $(document).on('click', '#add_cart', function(){
         }else{
         $.ajax({
             type: 'POST',
-            url: '<?=site_url('sale/process')?>',
+            url: '<?=site_url('Sale/process')?>',
             data: {'add_cart' : true, 'item_id' : item_id, 'price' : price, 'qty' : qty},
             dataType: 'json',
             success: function(result) {

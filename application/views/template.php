@@ -163,6 +163,7 @@
             <?php if($this->fungsi->user_login()->level  ==  1){?>
             <li class="header">PENGATURAN</li>
             <li <?= $this->uri->segment(1) == 'user' ? 'class="active"' : ''?> ><a href="<?= site_url('user')?>"><i class="fa fa-user"></i> <span>Users</span></a></li>
+            <li <?= $this->uri->segment(1) == 'Order' ? 'class="active"' : ''?> ><a href="<?= base_url('Order')?>"><i class="fa fa-dollar"></i> <span>Users</span></a></li>
             <?php } ?>
       </ul>
     </section>

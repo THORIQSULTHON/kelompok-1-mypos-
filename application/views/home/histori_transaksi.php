@@ -62,7 +62,7 @@
                             <div class="col-sm">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title"><?= $data['id_transaksi']; ?></h5>
+                                        <h5 class="card-title">Perhatian Untuk kode<?= $data['id_transaksi']; ?></h5>
                                         <?php if($data['bukti_transfer'] != null) :?>
                                                <p class="badge badge-light">Bukti Transfer Telah di upload, Klik tombol "Ganti foto" ganti Bukti</p>
                                         <?php else : ?>
