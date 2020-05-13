@@ -14,4 +14,20 @@ class Order extends CI_Controller {
     {
         $this->template->load('template', 'order_pending/order_data');
     }
+
+    public function process()
+    {
+        $post = $this->input->post(null, TRUE);
+        if(isset($_POST['acc_tombol']))
+        {
+            $this->Transaksi_m->acc_trans($post);
+        }
+
+        if($this->db->affected_rows() > 0 )
+        {
+            echo "<script>alert('Data berhasil di Terima');</script>";
+        }
+
+        // echo "<script>window.location='".site_url('Order')."';</script>";
+    }
 }

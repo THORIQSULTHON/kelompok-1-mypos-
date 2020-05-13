@@ -40,7 +40,8 @@
                         <tbody>
                             <?php   $no = 1;
                                     $quer = $this->db->query("SELECT * FROM transaksi")->result_array();
-                                    foreach($quer as $key => $data){?>
+                                    foreach($quer as $key => $data){
+                                        $ids = $data['id_transaksi'];?>
                         <tr>
                                 <td style="width:5%;"><?=$no++?>.</td>
                                 <td><?= $data['id_transaksi'];?></td>
@@ -58,12 +59,12 @@
                                 <td><?= $data['no_rek'];?></td>
                                 <td class="text-center" width="160px">
 
-                                <a href="<?=base_url('Category/edit/'. $data['user_id']);?>" class="btn btn-danger btn-xs">
+                                <button  class="btn btn-danger btn-xs" disabled>
                                             <i class="fa fa-times-circle"></i> Tolak
-                                       </a>
-                                       <a href="<?=base_url('category/del/'. $data['user_id']);?>" onclick="return confirm('apakah Anda Yakin Menghapus Data?')" class="btn btn-success btn-xs">
+                                       </button>
+                                       <button data-target="#modalAcc<?=$ids;?>" data-toggle="modal" class="btn btn-success btn-xs">
                                             <i class="fa fa-check"></i> Terima
-                                       </a>
+                                       </button>
                                 </td>
                         </tr>  
 
@@ -74,3 +75,39 @@
                 </div>
             </div>
 </Section>
+
+<?php 
+
+    $qy    = $this->db->query("SELECT * FROM transaksi")->result_array();
+    foreach($qy as $data) :
+        $id = $data['id_transaksi'];
+        $qy    = $this->db->query("SELECT * FROM transaksi WHERE id_transaksi = '$id'")->result_array();
+?>
+    <!-- Modal upload sekaligus input no rek -->
+    <div class="modal fade" id="modalAcc<?=$id;?>">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                            <h4 class="modal-tittle">Apakah data transaksi dari id <b><?=$id;?></b> Menurut anda valid?</h4>
+                    </div>
+                <form action="<?=base_url('Order/process');?>" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="norek"></label>
+                            <input type="text" class="form-control" name="idr" id="idr" value="<?=$id;?>">
+                    </div>
+                <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">Tidak</button>
+                        <button class="btn btn-success" name="acc_tombol" type="submit">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<?php
+    endforeach;
+?>
