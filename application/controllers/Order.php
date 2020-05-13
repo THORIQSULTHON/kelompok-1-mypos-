@@ -21,6 +21,25 @@ class Order extends CI_Controller {
         $post = $this->input->post(null, TRUE);
         if(isset($_POST['acc_tombol']))
         {
+            $id_tr = $this->input->post('idr');
+            $id = $this->input->post('id_barang');
+            $tempo = $this->input->post('tempo');
+            $jml_tmp = 0;
+
+            $looping_idbrang = count($id);
+            $looping_jumlah_tempo = count($tempo);
+
+            if($looping_idbrang >= 1 && $looping_jumlah_tempo)
+            {
+                for ($i=0; $i <= $looping_idbrang ; $i++)
+                {
+                    if(isset($id[$i]) != '' && isset($tempo[$i]) != '')
+                    {
+                        $this->db->query("UPDATE dtl_transaksi SET jumlah_beli='$tempo[$i]', jml_dibeli_tmp='$jml_tmp' WHERE item_id = '$id[$i]' AND id_transaksi = '$id_tr'");
+                    }
+                }
+            }
+
             $this->Transaksi_m->acc_trans($post);
         }
 

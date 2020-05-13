@@ -81,7 +81,8 @@
     $qy    = $this->db->query("SELECT * FROM transaksi")->result_array();
     foreach($qy as $data) :
         $id = $data['id_transaksi'];
-        $qy    = $this->db->query("SELECT * FROM transaksi WHERE id_transaksi = '$id'")->result_array();
+        
+        // $qy    = $this->db->query("SELECT * FROM transaksi WHERE id_transaksi = '$id'")->result_array();
 ?>
     <!-- Modal upload sekaligus input no rek -->
     <div class="modal fade" id="modalAcc<?=$id;?>">
@@ -98,6 +99,14 @@
                         <div class="form-group">
                             <label for="norek"></label>
                             <input type="text" class="form-control" name="idr" id="idr" value="<?=$id;?>">
+                            <?php 
+                                $qyo = $this->db->query("SELECT * FROM dtl_transaksi WHERE id_transaksi = '$id'")->result();
+                                foreach($qyo as $key => $data) :
+                                    $id_item_y = $data->item_id;
+                            ?>
+                                <input type="text" name="id_barang[]" value="<?= $id_item_y; ?>">
+                                <input type="text" name="tempo[]" value="<?= $data->jml_dibeli_tmp; ?>">
+                            <?php endforeach;   ?>
                     </div>
                 <div class="modal-footer">
                         <button class="btn btn-default" data-dismiss="modal">Tidak</button>

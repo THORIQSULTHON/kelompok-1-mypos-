@@ -73,7 +73,7 @@
 							<div class="col-md-12">
 									<label for="">keseluruhan berat</label>
 								<input type="text"  id="keseluruhanberat" value="" placeholder="ads">
-									<label for="kota_provinsi">Pilih profinsi anda</label>
+									<label for="kota_provinsi">Pilih provinsi anda</label>
 									<select name="kota_provinsi" id="kota_provinsi" class="form-control mb-3 pb-1" onchange="get_kota()">
 									</select>
 										<label for="kota_kirim">Pilih kabupaten anda</label>
