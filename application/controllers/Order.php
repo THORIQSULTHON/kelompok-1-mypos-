@@ -12,7 +12,8 @@ class Order extends CI_Controller {
 
     public function index()
     {
-        $this->template->load('template', 'order_pending/order_data');
+        $data['row'] = $this->Transaksi_m->get_transaksi();
+        $this->template->load('template', 'order_pending/order_data', $data);
     }
 
     public function process()

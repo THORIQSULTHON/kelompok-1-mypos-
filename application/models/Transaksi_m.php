@@ -38,15 +38,16 @@ class Transaksi_m extends CI_Model
         $this->db->delete('cart');
     }
 
-    public function get_transaksi($id = null)
+    public function get_transaksi($users_params = null)
     {
-        $this->db->from('transaksi');
-        if ($id != null)
+        
+        // $qry  = "SELECT * FROM `transaksi`";
+        if ($users_params != null)
         {
-            $this->db->where('customer_id', $id);
+            $this->db->where('customer_id', $users_params);
         }
-        $querys = $this->db->get();
-        return $querys->result_array();
+        $querys = $this->db->get('transaksi')->result_array();
+        return $querys;
     }
 
     public function get($id = null)
@@ -90,19 +91,6 @@ class Transaksi_m extends CI_Model
         }
 
         $this->db->where('id_transaksi', $post['id_trans']);
-        $this->db->update('transaksi', $params);
-    }
-
-    public function acc_trans($post)
-    {
-        $kasir = $this->session->userdata('userid');
-        $params  = [
-            'user_id' => $kasir,
-            'tgl_kirim' => date('ymd'),
-            'status_bayar' => 1,
-            'status_kirim' => 1
-        ];
-        $this->db->where('id_transaksi', $post['idr']);
         $this->db->update('transaksi', $params);
     }
 }

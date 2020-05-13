@@ -39,8 +39,8 @@
                         </thead>
                         <tbody>
                             <?php   $no = 1;
-                                    $quer = $this->db->query("SELECT * FROM transaksi")->result_array();
-                                    foreach($quer as $key => $data){
+                                    // $quer = $this->db->query("SELECT * FROM transaksi")->result_array();
+                                    foreach($row as $data){
                                         $ids = $data['id_transaksi'];?>
                         <tr>
                                 <td style="width:5%;"><?=$no++?>.</td>

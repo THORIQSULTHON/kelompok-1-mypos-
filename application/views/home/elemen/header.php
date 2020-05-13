@@ -39,7 +39,7 @@
 	<!-- Header section -->
 	<header class="header-section">
 		<div class="header-top">
-			<div class="container">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-2 text-center text-lg-left">
 						<!-- logo -->
@@ -47,7 +47,7 @@
 							<!-- <img src="" alt=""> -->
 						</a>
 					</div>
-					<div class="col-xl-4 col-lg-5 ml-5">
+					<div class="col-xl-4 col-lg-5 ml-auto d-flex justify-content-end">
 						<div class="user-panel">
 							<div class="up-item main-menu ml-2">
 								<i class="flaticon-profile"></i>
@@ -59,7 +59,7 @@
 								<ul class="sub-menu">
 									<li><a href="<?= base_url('Auth_user/logout') ?>">Logout</a></li>
 									<li><a href="#">Ganti Password</a></li>
-									<li><a data-target="#modalUpload" data-toggle="modal" class="btn">Upload bukti Pembayaran</a></li>
+									<li><a href="<?=base_url('Home/histori_transaksi');?>">Histori Pembayaran</a></li>
 									</ul>
 								<?php else :?>
 								<!-- kondisi gagal -->
@@ -114,7 +114,7 @@
 					</li> -->
 					<li><a href="#">Menu user</a>
 						<ul class="sub-menu">
-							<li><a href="./product.html">Upload bukti Pembayaran</a></li>
+							<li><a href="./product.html">Histori </a></li>
 							<li><a href="./category.html">Ganti Password</a></li>
 						</ul>
 					</li>
