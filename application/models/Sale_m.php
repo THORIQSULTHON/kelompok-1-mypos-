@@ -48,6 +48,19 @@ class Sale_m extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    public function get_online_report($get = null)
+    {
+        $this->db->select('*');
+        $this->db->from('transaksi');
+        if ($get != null)
+        {
+            $this->db->where($get);
+        }
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function add_cart($post)
     {
         $query = $this->db->query("SELECT MAX(cart_id) AS cart_no FROM t_cart");

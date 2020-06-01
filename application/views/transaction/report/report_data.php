@@ -38,13 +38,13 @@
                                     foreach($row->result() as $key => $data){?>
                         <tr>
                                 <td style="width:5%;"><?=$no++?>.</td>
-                                <td><?=$data->invoice;?></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td><?=$data->id_transaksi;?></td>
+                                <td><?=$data->user_id;?></td>
+                                <td><?=$data->total_final;?></td>
+                                <td><?=$data->id_transaksi;?></td>
                                 <td class="text-center" width="160px">
 
-                                <!-- <a href="<?=site_url('supplier/edit/'. $data->supplier_id)?>" class="btn btn-warning btn-xs"> -->
+                                <a class="btn btn-warning btn-xs">
                                             <i class="fa fa-pencil"></i> Edit
                                        </a>
                                        <!-- <a href="<?=site_url('supplier/del/'. $data->supplier_id)?>" onclick="return confirm('apakah Anda Yakin Menghapus Data?')" class="btn btn-danger btn-xs">

@@ -12,7 +12,7 @@ class Report extends CI_Controller {
 
     public function index()
     {
-        $data['row']  = $this->Sale_m->get_report();
+        $data['row']  = $this->Sale_m->get_online_report();
         $this->template->load('template', 'transaction/report/report_data', $data);
     }
     
