@@ -45,9 +45,9 @@ class Order extends CI_Controller {
 
         if($this->db->affected_rows() > 0 )
         {
-            echo "<script>alert('Data berhasil di Terima');</script>";
+            echo "<script>alert('Data berhasil di Tedwadwadwarima');</script>";
         }
-
+        echo "<script>window.location='".site_url('Order')."';</script>";
         // echo "<script>window.location='".site_url('Order')."';</script>";
     }
 }
