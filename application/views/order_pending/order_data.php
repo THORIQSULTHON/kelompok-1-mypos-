@@ -98,19 +98,19 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="norek"></label>
-                            <input type="text" class="form-control" name="idr" id="idr" value="<?=$id;?>">
+                            <input type="hidden" class="form-control" name="idr" id="idr" value="<?=$id;?>">
                             <?php 
                                 $qyo = $this->db->query("SELECT * FROM dtl_transaksi WHERE id_transaksi = '$id'")->result();
                                 foreach($qyo as $key => $data) :
                                     $id_item_y = $data->item_id;
                             ?>
-                                <input type="text" name="id_barang[]" value="<?= $id_item_y; ?>">
-                                <input type="text" name="tempo[]" value="<?= $data->jml_dibeli_tmp; ?>">
+                                <input type="hidden" name="id_barang[]" value="<?= $id_item_y; ?>">
+                                <input type="hidden" name="tempo[]" value="<?= $data->jml_dibeli_tmp; ?>">
                             <?php endforeach;   ?>
                     </div>
                 <div class="modal-footer">
-                        <button class="btn btn-default" data-dismiss="modal">Tidak</button>
-                        <button class="btn btn-success" name="acc_tombol" type="submit">Simpan</button>
+                        <button class="btn btn-default" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-success" name="acc_tombol" type="submit">Konfirmasi</button>
                     </form>
                 </div>
             </div>

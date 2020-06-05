@@ -58,7 +58,7 @@
 								<li><a href="#">Menu user</a>
 								<ul class="sub-menu">
 									<li><a href="<?= base_url('Auth_user/logout') ?>">Logout</a></li>
-									<li><a href="#">Ganti Password</a></li>
+									<!-- <li><a href="#">Ganti Password</a></li> -->
 									<li><a href="<?=base_url('Home/histori_transaksi');?>">Histori Pembayaran</a></li>
 									</ul>
 								<?php else :?>
@@ -112,12 +112,14 @@
 							<li><a href="#">Flip Flops</a></li>
 						</ul>
 					</li> -->
-					<li><a href="#">Menu user</a>
+						<!-- kalo nutut aktifkan yang ini lung -->
+					<!-- <li><a href="#">Menu user</a>
 						<ul class="sub-menu">
 							<li><a href="./product.html">Histori </a></li>
 							<li><a href="./category.html">Ganti Password</a></li>
 						</ul>
-					</li>
+					</li> -->
+
 					<!-- <li><a href="#">Blog</a></li> -->
 				</ul>
 			</div>

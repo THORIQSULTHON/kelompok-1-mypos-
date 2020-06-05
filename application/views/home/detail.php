@@ -34,7 +34,7 @@
 
 						<div class="quantity">
 							<p>Jumlah</p>
-							<div class="pro-qty"><input type="number" id="qeteye" name="qty" value="1"></div>
+							<div class="pro-qty"><input type="number" id="qeteye" name="qty"></div>
 						</div>
 						
 						<div id="accordion" class="accordion-area">

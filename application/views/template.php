@@ -16,7 +16,7 @@
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>                                                     <!--   jika segment pertama adalah sale maka class sidebar yang pertamanya adalah class "sidebar-mini" akan di rubah menjadi "sidebar-collapse"    -->
-<body class="hold-transition skin-purple sidebar-mini <?= $this->uri->segment(1) == 'sale' ? 'sidebar-collapse' : null?>">
+<body class="hold-transition skin-purple sidebar-mini <?= $this->uri->segment(1) == 'Sale' ? 'sidebar-collapse' : null?>">
 
 <div class="wrapper">
   <header class="main-header">
@@ -135,14 +135,14 @@
             <li <?= $this->uri->segment(1) == 'item' ? 'class="active"' : ''?>><a href="<?= site_url('item')?>"><i class="fa fa-circle-o"></i> Item</a></li>
           </ul>
         </li>
-        <li class="treeview <?= $this->uri->segment(1) == 'stock' || $this->uri->segment(1) == 'sale' ? 'active' : ''?>">
+        <li class="treeview <?= $this->uri->segment(1) == 'stock' || $this->uri->segment(1) == 'Sale' ? 'active' : ''?>">
             <a href="">
                 <i class="fa fa-shopping-cart"></i> <span>Transaksi</span>
                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
-                <li <?= $this->uri->segment(1) == 'sale' ? 'class="active"' : ''?> >
-                    <a href="<?= site_url('sale')?>"><i class="fa fa-circle-o">Penjualan</i>
+                <li <?= $this->uri->segment(1) == 'Sale' ? 'class="active"' : ''?> >
+                    <a href="<?= site_url('Sale')?>"><i class="fa fa-circle-o">Penjualan</i>
                 </a></li>
                 <!-- segment pertama harus di linknya harus localhost/mypos/stock "stock" itu adalah segment pertama dan ke dua adalah in maka hasilnya "localhost/mypost/stock/in" jika kondisi ini terpenuhi maka akan di aktifkan class selectednya -->
                 <li <?= $this->uri->segment(1) == 'stock' && $this->uri->segment(2) == 'in' ? 'class="active"' : ''?>><a href="<?= site_url('stock/in')?>"><i class="fa fa-circle-o">Stock In</i></a></li>
@@ -150,20 +150,20 @@
                 <li <?= $this->uri->segment(1) == 'stock' && $this->uri->segment(2) == 'out' ? 'class="active"' : ''?>><a href="<?= site_url('stock/out')?>"><i class="fa fa-circle-o">Stock Out</i></a></li>
             </ul>
         </li>
-                <li class="treeview">
-            <a href="">
+            <li class="treeview <?= $this->uri->segment(1) == 'Sales' || $this->uri->segment(1) == 'Stock' || $this->uri->segment(1) == 'Report'? 'active' : ''?>">
+              <a href="">
                 <i class="fa fa-pie-chart"></i> <span>Report</span>
                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
                 <li><a href=""><i class="fa fa-circle-o">Sales</i></a></li>
-                <li><a href=""><i class="fa fa-circle-o">Stock In</i></a></li>
+                <li <?= $this->uri->segment(1) == 'Report' ? 'class="active"' : ''?>><a href="<?= site_url('Report')?>"><i class="fa fa-circle-o">Sale Online</i></a></li>
             </ul>
         </li>
             <?php if($this->fungsi->user_login()->level  ==  1){?>
             <li class="header">PENGATURAN</li>
             <li <?= $this->uri->segment(1) == 'user' ? 'class="active"' : ''?> ><a href="<?= site_url('user')?>"><i class="fa fa-user"></i> <span>Users</span></a></li>
-            <li <?= $this->uri->segment(1) == 'Order' ? 'class="active"' : ''?> ><a href="<?= base_url('Order')?>"><i class="fa fa-dollar"></i> <span>Users</span></a></li>
+            <li <?= $this->uri->segment(1) == 'Order' ? 'class="active"' : ''?> ><a href="<?= base_url('Order')?>"><i class="fa fa-dollar"></i> <span>Pesanan</span></a></li>
             <?php } ?>
       </ul>
     </section>
