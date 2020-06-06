@@ -29,7 +29,7 @@
                                 <th>Pembeli</th>
                                 <th>Kasir</th>
                                 <th>Total Harga</th>
-                                <th>Tanggal Transaksi</th>
+                                <!-- <th>Tanggal Transaksi</th> -->
                                 <th>Actions</th>
                             </tr>    
                         </thead>
@@ -40,8 +40,9 @@
                                 <td style="width:5%;"><?=$no++?>.</td>
                                 <td><?=$data->id_transaksi;?></td>
                                 <td><?=$data->user_id;?></td>
-                                <td><?=$data->total_final;?></td>
-                                <td><?= $data->tgl_kirim;?></td>
+                                <td><?= indo_currency($data->total_final);?></td>
+                                <!-- <td><?= indo_date($data->tgl_kirim);?></td> -->
+                                <!-- <td><?= date("Y-m-d", $data->tgl_kirim);?></td> -->
                                 <td class="text-center" width="160px">
 
                                 <a id="set_dtl" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modal-detail"
@@ -54,7 +55,7 @@
                                        
                                     </td>
                                 </tr>  
-                            <!-- <?php }?> -->
+                            <?php }?>
 
                         </tbody>
                     </table>
