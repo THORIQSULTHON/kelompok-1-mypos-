@@ -52,6 +52,7 @@
                                 data-tgl="<?=$data->tgl_transaksi;?>">
                                             <i class="fa fa-book"></i> Lihat
                                        </a>
+                                <a href="" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Hapus</a>
                                        
                                     </td>
                                 </tr>  
