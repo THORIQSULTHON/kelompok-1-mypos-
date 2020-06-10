@@ -7,13 +7,19 @@ class Report extends CI_Controller {
     {
         parent::__construct();
         check_not_login();
-        $this->load->model('Sale_m');
+        $this->load->model('Sale_m', 'Sale');
     }
 
-    public function index()
+    public function online()
     {
-        $data['row']  = $this->Sale_m->get_online_report();
+        $data['row']  = $this->Sale->get_online_report();
         $this->template->load('template', 'transaction/report/report_data', $data);
+    }
+
+    public function sale()
+    {
+        $data['row']  = $this->Sale->get_sale();
+        $this->template->load('template', 'report/sale_report', $data);
     }
     
 }

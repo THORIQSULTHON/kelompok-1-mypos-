@@ -156,8 +156,8 @@
                 <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
             </a>
             <ul class="treeview-menu">
-                <li><a href=""><i class="fa fa-circle-o">Sales</i></a></li>
-                <li <?= $this->uri->segment(1) == 'Report' ? 'class="active"' : ''?>><a href="<?= site_url('Report')?>"><i class="fa fa-circle-o">Sale Online</i></a></li>
+              <li <?= $this->uri->segment(1) == 'Report' && $this->uri->segment(2) == 'online' ? 'class="active"' : ''?>><a href="<?= site_url('Report/online')?>"><i class="fa fa-circle-o">Sale Online</i></a></li>
+              <li <?= $this->uri->segment(1) == 'Report' && $this->uri->segment(2) == 'sale' ? 'class="active"' : ''?>><a href="<?= site_url('Report/sale')?>"><i class="fa fa-circle-o">Sales</i></a></li>
             </ul>
         </li>
             <?php if($this->fungsi->user_login()->level  ==  1){?>
