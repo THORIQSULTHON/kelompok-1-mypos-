@@ -9,27 +9,27 @@
 					<div class="footer-widget about-widget">
 						<h2>About</h2>
 						<p>Kopi rempah adalah kopi buatan khas jember yang tempat produksi kopi rempah ini berada di desa Garahan</p>
-						<img src="<?= base_url(); ?>assets/assets_landingpage/img/cards.png" alt="">
+						<!-- <img src="<?= base_url(); ?>assets/assets_landingpage/img/cards.png" alt=""> -->
 					</div>
 				</div>
 				<div class="col-lg-3 col-sm-6">
 					<div class="footer-widget about-widget">
-						<h2>Questions</h2>
+						<!-- <h2>Questions</h2> -->
 						<ul>
-							<li><a href="<?= base_url('auth/login'); ?>">Admin</a></li>
-							<li><a href="">Track Orders</a></li>
+							<!-- <li><a href="<?= base_url('auth/login'); ?>">Admin</a></li> -->
+							<!-- <li><a href="">Track Orders</a></li>
 							<li><a href="">Returns</a></li>
 							<li><a href="">Jobs</a></li>
 							<li><a href="">Shipping</a></li>
-							<li><a href="">Blog</a></li>
+							<li><a href="">Blog</a></li> -->
 						</ul>
-						<ul>
+						<!-- <ul>
 							<li><a href="">Partners</a></li>
 							<li><a href="">Bloggers</a></li>
 							<li><a href="">Support</a></li>
 							<li><a href="">Terms of Use</a></li>
 							<li><a href="">Press</a></li>
-						</ul>
+						</ul> -->
 					</div>
 				</div>
 				<!-- <div class="col-lg-3 col-sm-6">
@@ -91,7 +91,7 @@
 				</div>
 
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> 
-<p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+<!-- <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p> -->
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 			</div>

@@ -21,7 +21,7 @@
 							<i class="fa fa-star-o"></i>
 							<i class="fa fa-star-o"></i>
 							<i class="fa fa-star-o"></i>
-							<!-- <i class="fa fa-star-o fa-fade"></i> ini yntuk bintang kosongnya -->
+							<!-- <i class="fa fa-star-o fa-fade"></i> -->
 						</div>
 						<!-- <div class="p-review">
 							<a href="">3 reviews</a>|<a href="">Add your review</a>
@@ -53,6 +53,8 @@
 						</div>
 						<br>
 						<div class="quantity">
+							<?php $sesi = $this->session->userdata('customerid');
+							if(!empty($sesi)) : ?>
 						<?php 
 							$customer_id = $this->session->userdata('customerid');
 							$id_item = $row->item_id;
@@ -63,6 +65,10 @@
 						<?php else : ?>
 							<button type="submit" name="tambah_cart" class="site-btn">Beli Sekarang</button>
 						<?php endif;?>
+						<?php else : ?>
+							<button type="submit" href="<?= base_url('Home/Auth_user');?>" name="login" class="site-btn">Silahkan Login Untuk Membeli :)</button>
+						<?php endif;?>
+
 						</div>
 					</form>
 					<!-- <div class="social-sharing">

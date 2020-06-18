@@ -117,7 +117,11 @@ ol {
 .text-white a {
 	color: #fff;
 }
-
+.text-black h2,
+.text-black span,
+.text-black p {
+	color: #000000;
+}
 /*---------------------
   Commom elements
 -----------------------*/
@@ -560,10 +564,10 @@ ol {
 	position: absolute;
 	right: 0;
 	top: 226px;
-	width: 162px;
-	height: 162px;
+	width: 180px;
+	height: 180px;
 	border-radius: 50%;
-	background: #328ee4;
+	background: #01529e;
 	text-align: center;
 	padding-top: 20px;
 	-webkit-transform: rotate(45deg);
@@ -577,7 +581,7 @@ ol {
 	content: "";
 	width: calc(100% - 10px);
 	height: calc(100% - 10px);
-	border: 1px solid #dd3b69;
+	border: 1px solid #000000;
 	left: 5px;
 	top: 5px;
 	border-radius: 50%;
@@ -592,8 +596,8 @@ ol {
 }
 
 .hero-slider .hs-item .offer-card h2 {
-	font-size: 72px;
-	font-weight: 400;
+	font-size: 20px;
+	font-weight: 200;
 	line-height: 1;
 }
 
