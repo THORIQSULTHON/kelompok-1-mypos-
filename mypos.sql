@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2020 at 09:02 PM
+-- Generation Time: Jun 19, 2020 at 05:57 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -36,6 +36,13 @@ CREATE TABLE `cart` (
   `total_berat` int(40) NOT NULL,
   `tgl_transaksi` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id_cart`, `customer_id`, `id_item`, `qty_dibeli`, `total_berat`, `tgl_transaksi`) VALUES
+('IDC01606', 0, 21, 0, 0, '2020-06-16 15:28:49');
 
 -- --------------------------------------------------------
 
@@ -85,9 +92,29 @@ CREATE TABLE `dtl_transaksi` (
 --
 
 INSERT INTO `dtl_transaksi` (`id_transaksi`, `item_id`, `no`, `harga_satuan`, `jml_dibeli_tmp`, `jumlah_beli`) VALUES
-('IDC01105', '28', 1, 100000, 3, 0),
-('IDC01105', '26', 2, 1200000, 3, 0),
-('IDC11105', '28', 3, 100000, 4, 0);
+('IDC01105', '28', 1, 100000, 0, 3),
+('IDC01105', '26', 2, 1200000, 0, 3),
+('IDC11105', '28', 3, 100000, 0, 4),
+('IDC21205', '28', 4, 100000, 0, 0),
+('IDC21205', '26', 5, 1200000, 0, 0),
+('IDC31205', '14', 6, 121213, 0, 3),
+('IDC31205', '26', 7, 1200000, 0, 3),
+('IDC41305', '28', 8, 100000, 0, 6),
+('IDC50506', '28', 9, 100000, 0, 0),
+('IDC50506', '14', 10, 121213, 0, 0),
+('IDC61906', '2', 11, 12, 2, 0),
+('IDC71906', '23', 12, 1938190, 4, 0);
+
+--
+-- Triggers `dtl_transaksi`
+--
+DELIMITER $$
+CREATE TRIGGER `stok_min_online` AFTER UPDATE ON `dtl_transaksi` FOR EACH ROW BEGIN
+	UPDATE p_item SET stock = stock - NEW.jumlah_beli
+    WHERE item_id = NEW.item_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -138,12 +165,12 @@ CREATE TABLE `p_item` (
 
 INSERT INTO `p_item` (`item_id`, `barcode`, `name`, `category_id`, `unit_id`, `price`, `berat`, `deskripsi`, `stock`, `image`, `created`, `updated`) VALUES
 (2, 'A0012', 'Kopi Stamina', 2, 2, 12, 900, '', 28, 'item-200326-8929eb5faa.jpeg', '2020-03-22 23:21:18', '2020-05-08 17:24:05'),
-(14, 'A0123', 'qwdw', 2, 2, 121213, 100, '', 16, 'item-200504-fae40e9fc6.jpg', '2020-03-26 03:27:43', '2020-05-11 19:28:59'),
+(14, 'A0123', 'qwdw', 2, 2, 121213, 100, '', 7, 'item-200504-fae40e9fc6.jpg', '2020-03-26 03:27:43', '2020-05-11 19:28:59'),
 (21, 'kkkk', 'pqkeq', 3, 4, 90000, 250, 'adadwadwad\r\n\r\nadwad\r\n\r\nadawd', 18, 'item-200504-95a3a5c8cf.jpeg', '2020-03-29 16:23:06', '2020-05-11 19:29:09'),
 (23, 'facebook.com', 'awo[ka', 2, 2, 1938190, 250, '', 0, 'item-200504-676f542087.jpeg', '2020-04-05 20:55:21', '2020-05-11 19:29:16'),
-(26, 'aawad', 'Kopi rempahawd', 3, 2, 1200000, 1000, 'adadaawd', 10, 'item-200508-21feeb17c1.png', '2020-05-08 22:24:45', NULL),
+(26, 'aawad', 'Kopi rempahawd', 3, 2, 1200000, 1000, 'adadaawd', 99, 'item-200508-21feeb17c1.png', '2020-05-08 22:24:45', NULL),
 (27, 'pp', 'ppppp', 2, 4, 1000000, 8000, 'awda', 0, 'item-200510-5a1af13947.jpg', '2020-05-10 23:26:45', NULL),
-(28, 'A01233', 'adlll', 4, 4, 100000, 754, '\'oko', 0, 'item-200511-66ff800752.png', '2020-05-11 06:43:40', NULL);
+(28, 'A01233', 'adlll', 4, 4, 100000, 754, '\'oko', 98, 'item-200511-66ff800752.png', '2020-05-11 06:43:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -207,16 +234,23 @@ CREATE TABLE `transaksi` (
   `status_bayar` int(11) DEFAULT NULL,
   `status_kirim` int(11) DEFAULT NULL,
   `tgl_transaksi` varchar(32) DEFAULT NULL,
-  `bukti_transfer` varchar(123) DEFAULT NULL
+  `bukti_transfer` varchar(123) DEFAULT NULL,
+  `no_rek` varchar(22) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_transaksi`, `user_id`, `customer_id`, `alamat_kirim`, `tgl_kirim`, `total_harga`, `total_final`, `status_bayar`, `status_kirim`, `tgl_transaksi`, `bukti_transfer`) VALUES
-('IDC01105', 0, 5, 'JL. Banyuwangi Garahan Pasar alasa', NULL, 3900000, 4150000, NULL, NULL, '2020-05-11 19:20:41', NULL),
-('IDC11105', 0, 5, 'AA', NULL, 400000, 544000, NULL, NULL, '2020-05-11 19:24:19', NULL);
+INSERT INTO `transaksi` (`id_transaksi`, `user_id`, `customer_id`, `alamat_kirim`, `tgl_kirim`, `total_harga`, `total_final`, `status_bayar`, `status_kirim`, `tgl_transaksi`, `bukti_transfer`, `no_rek`) VALUES
+('IDC01105', 1, 5, 'JL. Banyuwangi Garahan Pasar alasa', 200513, 3900000, 4150000, 1, 1, '2020-05-11 19:20:41', 'bukti-200512-86ff46a8a5.jpg', '11111'),
+('IDC11105', 1, 5, 'AA', 200513, 400000, 544000, 1, 1, '2020-05-11 19:24:19', 'bukti-200512-45f4bdd50c.png', '12322'),
+('IDC21205', 1, 5, 'koko', 200605, 2600000, 2696000, 1, 1, '2020-05-12 13:57:42', NULL, '2123'),
+('IDC31205', 1, 1, 'awdawd', 200513, 3963639, 4107639, 1, 1, '2020-05-12 23:49:40', 'bukti-200512-a6670fd0ae.jpg', '1212123'),
+('IDC41305', 1, 5, 'AWD', 200513, 600000, 830000, 1, 1, '2020-05-13 20:09:14', 'bukti-200513-8ff6f8fa69.jpg', '876609'),
+('IDC50506', 1, 5, 'awdadwad', 200605, 706065, 759065, 1, 1, '2020-06-05 18:05:28', 'bukti-200605-d7af4bc9a3.jpg', '2323123'),
+('IDC61906', 0, 5, 'klhklhlkjhjhjhjghjghg', NULL, 24, 110024, NULL, NULL, '2020-06-19 17:19:34', NULL, NULL),
+('IDC71906', 0, 5, 'i7t6y6y67y6', NULL, 7752760, 7806760, NULL, NULL, '2020-06-19 17:54:52', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -260,7 +294,8 @@ CREATE TABLE `t_sale` (
 --
 
 INSERT INTO `t_sale` (`sale_id`, `invoice`, `customer_id`, `total_price`, `discount`, `final_price`, `cash`, `remaining`, `note`, `date`, `user_id`, `created`) VALUES
-(53, 'PC2005090001', NULL, 90012, 0, 90012, 900122, 810110, 'aa', '2020-05-09', 1, '2020-05-10 03:44:43');
+(53, 'PC2005090001', NULL, 90012, 0, 90012, 900122, 810110, 'aa', '2020-05-09', 1, '2020-05-10 03:44:43'),
+(54, 'PC2005130001', NULL, 121213, 0, 121213, 121213, 0, '', '2020-05-13', 1, '2020-05-13 06:11:06');
 
 -- --------------------------------------------------------
 
@@ -284,7 +319,8 @@ CREATE TABLE `t_sale_detail` (
 
 INSERT INTO `t_sale_detail` (`detail_id`, `sale_id`, `item_id`, `price`, `qty`, `discount_item`, `total`) VALUES
 (60, 53, 21, 90000, 1, 0, 90000),
-(61, 53, 2, 12, 1, 0, 12);
+(61, 53, 2, 12, 1, 0, 12),
+(62, 54, 14, 121213, 1, 0, 121213);
 
 --
 -- Triggers `t_sale_detail`
@@ -469,13 +505,13 @@ ALTER TABLE `supplier`
 -- AUTO_INCREMENT for table `t_sale`
 --
 ALTER TABLE `t_sale`
-  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `sale_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `t_sale_detail`
 --
 ALTER TABLE `t_sale_detail`
-  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT for table `t_stock`
