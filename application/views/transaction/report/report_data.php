@@ -39,7 +39,7 @@
                         <tr>
                                 <td style="width:5%;"><?=$no++?>.</td>
                                 <td><?=$data->id_transaksi;?></td>
-                                <td><?=$data->user_id;?></td>
+                                <td><?=$data->name;?></td>
                                 <td><?= indo_currency($data->total_final);?></td>
                                 <!-- <td><?= indo_date($data->tgl_kirim);?></td> -->
                                 <!-- <td><?= date("Y-m-d", $data->tgl_kirim);?></td> -->

@@ -51,8 +51,9 @@ class Sale_m extends CI_Model
 
     public function get_online_report($get = null)
     {
-        $this->db->select('*');
+        $this->db->select('*, user.name');
         $this->db->from('transaksi');
+        $this->db->join('user', 'transaksi.user_id = user.user_id');
         if ($get != null)
         {
             $this->db->where($get);

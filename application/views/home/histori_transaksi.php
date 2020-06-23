@@ -38,9 +38,11 @@
                         <td><?=indo_currency($harga2);?></td>
                         <td><?=$data['tgl_transaksi'];?></td>
                         <td>
-                            <?php if($data['status_bayar'] != null) :?>
+                            <?php if($data['status_bayar'] == 1) :?>
                                 <a class="badge badge-success" style="color: white;">Sudah Terkomfirmasi</a>
                                 <a class="badge badge-light">Barang Akan di kirim</a>
+                            <?php elseif($data['status_bayar'] == 2) : ?>
+                                <a class="badge badge-danger">Di tolak, karena Bukti tidak valid</a>
                             <?php elseif ($data['bukti_transfer'] != null) :?>
                                 <a class="badge badge-primary" style="color: white;">Tunggu konfirmasi Penjual</a>
                             <?php else :?>

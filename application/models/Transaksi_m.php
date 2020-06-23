@@ -106,4 +106,15 @@ class Transaksi_m extends CI_Model
         $this->db->where('id_transaksi', $post['idr']);
         $this->db->update('transaksi', $params);
     }
+    public function batal($post)
+    {
+        $kasir = $this->session->userdata('userid');
+        $params  = [
+            'user_id' => $kasir,
+            'tgl_kirim' => date('ymd'),
+            'status_bayar' => 2
+        ];
+        $this->db->where('id_transaksi', $post['idr']);
+        $this->db->update('transaksi', $params);
+    }
 }

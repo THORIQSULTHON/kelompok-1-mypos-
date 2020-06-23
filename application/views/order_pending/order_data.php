@@ -59,7 +59,7 @@
                                 <td><?= $data['no_rek'];?></td>
                                 <td class="text-center" width="160px">
 
-                                <button  class="btn btn-danger btn-xs" disabled>
+                                <button data-target="#modalbatal<?=$ids;?>" data-toggle="modal" class="btn btn-danger btn-xs">
                                             <i class="fa fa-times-circle"></i> Tolak
                                        </button>
                                        <button data-target="#modalAcc<?=$ids;?>" data-toggle="modal" class="btn btn-success btn-xs">
@@ -75,7 +75,7 @@
                 </div>
             </div>
 </Section>
-
+<!-- acc -->
 <?php 
 
     $qy    = $this->db->query("SELECT * FROM transaksi")->result_array();
@@ -111,6 +111,53 @@
                 <div class="modal-footer">
                         <button class="btn btn-default" data-dismiss="modal">Batal</button>
                         <button class="btn btn-success" name="acc_tombol" type="submit">Konfirmasi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+<?php
+    endforeach;
+?>
+
+
+<!-- batal -->
+<?php 
+
+    $qy    = $this->db->query("SELECT * FROM transaksi")->result_array();
+    foreach($qy as $data) :
+        $id = $data['id_transaksi'];
+        
+        // $qy    = $this->db->query("SELECT * FROM transaksi WHERE id_transaksi = '$id'")->result_array();
+?>
+    <!-- Modal upload sekaligus input no rek -->
+    <div class="modal fade" id="modalbatal<?=$id;?>">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                            <h4 class="modal-tittle">Apakah data transaksi dari id <b><?=$id;?></b> Menurut anda valid?</h4>
+                    </div>
+                <form action="<?=base_url('Order/process_batal');?>" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="norek"></label>
+                            <input type="hidden" class="form-control" name="idr" id="idr" value="<?=$id;?>">
+                            <?php 
+                                $qyo = $this->db->query("SELECT * FROM dtl_transaksi WHERE id_transaksi = '$id'")->result();
+                                foreach($qyo as $key => $data) :
+                                    $id_item_y = $data->item_id;
+                            ?>
+                                <input type="hidden" name="id_barang[]" value="<?= $id_item_y; ?>">
+                                <input type="hidden" name="tempo[]" value="<?= $data->jml_dibeli_tmp; ?>">
+                            <?php endforeach;   ?>
+                    </div>
+                <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal">Batal</button>
+                        <button class="btn btn-success" name="acc_batal" type="submit">Konfirmasi</button>
                     </form>
                 </div>
             </div>
