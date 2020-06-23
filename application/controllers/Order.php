@@ -79,7 +79,7 @@ class Order extends CI_Controller {
 
         if($this->db->affected_rows() > 0 )
         {
-            echo "<script>alert('Data berhasil di Konfirmasi!');</script>";
+            echo "<script>alert('Data berhasil di Batalkan!');</script>";
         }
         echo "<script>window.location='".site_url('Order')."';</script>";
         // echo "<script>window.location='".site_url('Order')."';</script>";

@@ -139,7 +139,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                            <h4 class="modal-tittle">Apakah data transaksi dari id <b><?=$id;?></b> Menurut anda valid?</h4>
+                            <h4 class="modal-tittle">Apakah data transaksi dari id <b><?=$id;?></b> Menurut anda tidak valid?</h4>
                     </div>
                 <form action="<?=base_url('Order/process_batal');?>" method="post">
                     <div class="modal-body">
@@ -157,7 +157,7 @@
                     </div>
                 <div class="modal-footer">
                         <button class="btn btn-default" data-dismiss="modal">Batal</button>
-                        <button class="btn btn-success" name="acc_batal" type="submit">Konfirmasi</button>
+                        <button class="btn btn-danger" name="acc_batal" type="submit">Tolak</button>
                     </form>
                 </div>
             </div>

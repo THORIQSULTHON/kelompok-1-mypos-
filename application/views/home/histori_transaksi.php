@@ -66,7 +66,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title">Perhatian Untuk kode<?= $data['id_transaksi']; ?></h5>
                                         <?php if($data['bukti_transfer'] != null) :?>
-                                               <p class="badge badge-light">Bukti Transfer Telah di upload, Klik tombol "Ganti foto" ganti Bukti</p>
+                                               <p class="badge badge-light">Bukti Transfer Telah di upload, Klik tombol "Ganti foto" untuk ganti Bukti</p>
                                         <?php else : ?>
                                                 <p class="card-text">Silahkan Membayar ke rekening di atas, dan mengirim foto dengan menekan tombol "<b>Upload Bukti</b>"</p>
                                         <?php endif; ?>
