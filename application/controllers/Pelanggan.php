@@ -7,11 +7,11 @@ class Pelanggan extends CI_Controller {
     {
         parent::__construct();
         check_not_login();
-        $this->load->model('customer_m');
+        $this->load->model('Customer_m');
     }
 	public function index()
 	{
-		$data['row']	=	$this->customer_m->get();
+		$data['row']	=	$this->Customer_m->get();
 		$this->template->load('template', 'customer/customer_data', $data);
 	}
 
@@ -21,6 +21,8 @@ class Pelanggan extends CI_Controller {
 		$customer->customer_id		=	null;
         $customer->name 			=	null;
 		$customer->gender 			=	null;
+		$customer->email_db 			=	null;
+		$customer->password_db 			=	null;
 		$customer->phone 			=	null;
 		$customer->address 			=	null;
 		$data = array(
@@ -36,12 +38,12 @@ class Pelanggan extends CI_Controller {
 
 		if(isset($_POST['add']))
 		{
-				$this->customer_m->add($post);
+				$this->Customer_m->add($post);
 		}
 
 		else if(isset($_POST['edit']))
 		{
-				$this->customer_m->edit($post);
+				$this->Customer_m->edit($post);
 		}
 
 		if($this->db->affected_rows() > 0 )
@@ -57,7 +59,7 @@ class Pelanggan extends CI_Controller {
 
 	public function del($id)
 	{
-		$this->customer_m->del($id);
+		$this->Customer_m->del($id);
 		if($this->db->affected_rows() > 0 )
 		{
 		echo "<script>alert('Data berhasil di hapus');</script>";
@@ -67,7 +69,7 @@ class Pelanggan extends CI_Controller {
 					// $id adalah para meter dari link di dalam tombol edit yang berisikan (costumer_id)
 	public function edit($id)
 	{
-		$query	=		$this->customer_m->get($id);
+		$query	=		$this->Customer_m->get($id);
 		if($query->num_rows() > 0)
 		{
 			$customer	=	$query->row();

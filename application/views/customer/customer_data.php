@@ -15,7 +15,7 @@
             <div class="box-header">
                 <h3 class="box-title">Daftar customer</h3>
                 <div class="pull-right">
-                        <a href="<?=site_url('customer/add')?>" class="btn btn-primary btn-flat">
+                        <a href="<?=site_url('Pelanggan/add')?>" class="btn btn-primary btn-flat">
                                 <i class="fa fa-plus"></i> Buat
                         </a>
                 </div>
@@ -46,10 +46,10 @@
                                 <td><?= $data->address?></td>
                                 <td class="text-center" width="160px">
 
-                                <a href="<?=site_url('customer/edit/'. $data->customer_id)?>" class="btn btn-warning btn-xs">
+                                <a href="<?=site_url('Pelanggan/edit/'. $data->customer_id)?>" class="btn btn-warning btn-xs">
                                             <i class="fa fa-pencil"></i> Edit
                                        </a>
-                                       <a href="<?=site_url('customer/del/'. $data->customer_id)?>" onclick="return confirm('apakah Anda Yakin Menghapus Data?')" class="btn btn-danger btn-xs">
+                                       <a href="<?=site_url('Pelanggan/del/'. $data->customer_id)?>" onclick="return confirm('apakah Anda Yakin Menghapus Data?')" class="btn btn-danger btn-xs">
                                             <i class="fa fa-trash"></i> Hapus
                                        </a>
                                 </td>

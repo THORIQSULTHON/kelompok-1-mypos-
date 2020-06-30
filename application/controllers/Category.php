@@ -7,11 +7,11 @@ class Category extends CI_Controller {
     {
         parent::__construct();
         check_not_login();
-        $this->load->model('category_m');
+        $this->load->model('Category_m');
     }
 	public function index()
 	{
-		$data['row']	=	$this->category_m->get();
+		$data['row']	=	$this->Category_m->get();
 		$this->template->load('template', 'product/category/category_data', $data);
 	}
 
