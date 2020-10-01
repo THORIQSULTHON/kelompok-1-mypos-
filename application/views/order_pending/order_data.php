@@ -40,23 +40,29 @@
                         <tbody>
                             <?php   $no = 1;
                                     // $quer = $this->db->query("SELECT * FROM transaksi")->result_array();
-                                    foreach($row as $data){
-                                        $ids = $data['id_transaksi'];?>
+                                    foreach($row->result() as $key => $data){
+                                        $ids = $data->id_transaksi?>
                         <tr>
                                 <td style="width:5%;"><?=$no++?>.</td>
-                                <td><?= $data['id_transaksi'];?></td>
-                                <td><?= $data['user_id'];?></td>
-                                <td><?= $data['customer_id'];?></td>
-                                <td><?= indo_currency($data['total_harga']);?></td>
-                                <td><?= indo_currency($data['total_final']);?></td>
+                                <td><?= $data->id_transaksi?></td>
+                                <td><?= $data->user_name?></td>
+                                <td><?= $data->customer_name?></td>
+                                <td><?= indo_currency($data->total_harga)?></td>
+                                <td><?= indo_currency($data->total_final)?></td>
                                 <td>
-                                <?php if($data['bukti_transfer'] != null) :?>
-                                    <img style="width:100px; height: 100px;" src="<?=base_url('uploads/bukti/'. $data['bukti_transfer']);?>">
+                                <?php if($data->bukti_transfer != null) :?>
+                                    <img style="width:100px; height: 100px;" src="<?=base_url('uploads/bukti/'. $data->bukti_transfer);?>">
                                 <?php else :  ?>
                                     belum mengirim bukti transfer 
                                 <?php endif; ?>
                                 </td>
-                                <td><?= $data['no_rek'];?></td>
+                                <td>
+                                <?php if($data->no_rek != null) :?>
+                                <?= $data->no_rek?>
+                                <?php else :  ?>
+                                    Belum/Tidak mengirim No Rekening
+                                <?php endif; ?>
+                                </td>
                                 <td class="text-center" width="160px">
 
                                 <button data-target="#modalbatal<?=$ids;?>" data-toggle="modal" class="btn btn-danger btn-xs">

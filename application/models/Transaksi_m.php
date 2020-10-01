@@ -42,11 +42,17 @@ class Transaksi_m extends CI_Model
     {
         
         // $qry  = "SELECT * FROM `transaksi`";
+        // $this->db->select('transaksi.*, user.name as user_name, customer.name as customer_name');
+        $this->db->select('transaksi.*, user.name as user_name, customer.name as customer_name');
+        $this->db->from('transaksi');
+        $this->db->join('user', 'transaksi.user_id = user.user_id');
+        $this->db->join('customer', 'transaksi.customer_id = customer.customer_id');
+
         if ($users_params != null)
         {
             $this->db->where('customer_id', $users_params);
         }
-        $querys = $this->db->get('transaksi')->result_array();
+        $querys = $this->db->get();
         return $querys;
     }
 

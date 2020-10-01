@@ -103,7 +103,7 @@
 								<!-- inputan yang akan di jumlahkan -->
 								<label for="">Biaya</label>
 								<input type="text" name="final_total2" id="final_total2"  placeholder="ads">
-								<input type="text" name="coba1"  id="coba1"  placeholder="ini tempat nyoba bos">
+								<input type="text" name="coba1"  id="coba1"  placeholder="Total Keseluruhan barang dan ongkir">
 								<!-- Akhir Inputan hidden -->
 								<label for="">Total</label>
 								<input type="text" placeholder="Total Pembayaran" name="total_bayar" id="total_bayar" readonly>
@@ -116,7 +116,15 @@
 								<input type="text" name="" placeholder="Zip code">
 							</div> -->
 							<div class="col-md-6 mt-3">
-						<button type="submit" name="transak" class="site-btn submit-order-btn">Proceed to checkout</button>
+							<?php 
+							$customer_id = $this->session->userdata('customerid');
+							$query = "SELECT * FROM cart WHERE  customer_id = '$customer_id'";
+							$qr = $this->db->query($query);
+							if($qr->num_rows() > 0) :?>
+								<button type="submit" name="transak" class="site-btn submit-order-btn">Proceed to checkout</button>
+							<?php else : ?>
+								<button type="submit"  class="site-btn submit-order-btn" disabled>Silahkan Tambahkan Barang halaman belanja</button>
+							<?php endif;?>
 					</form>
 				</div>
 

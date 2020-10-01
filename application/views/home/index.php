@@ -18,7 +18,7 @@
 				<div class="col-lg-3 col-sm-6">
 						<div class="product-item">
 							<div class="pi-pic">
-								<img src="<?= base_url ('uploads/product/'.$data->image);?>" style="width: 300px; height:300px;">
+								<img src="<?= base_url ('uploads/product/'.$data->image);?>" style="width: 250px; height:350px;">
 								<div class="pi-links">
 									<a href="<?= base_url('Home/detail/'. $data->item_id);?>" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
 									<!-- <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a> -->
